@@ -1,12 +1,13 @@
 def convert(num, base):
-    temp = "0123456789ABCDEF"
-    q, r = divmod(num, base) #몫, 나머지
+    if num == 0:
+        return "0"
     
-    #더 이상 나눌 몫이 없으면 나머지 반환, 재귀적으로 나머지 합치기
-    if q == 0:  
-        return temp[r] 
-    else:
-        return convert(q,base) + temp[r]
+    temp = "0123456789ABCDEF"
+    result = ''
+    while num > 0:
+        result += temp[num % base]
+        num //= base
+    return result[::-1]
     
 def solution(n, t, m, p):
     temp = ''
