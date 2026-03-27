@@ -1,22 +1,18 @@
+from collections import Counter
 def solution(want, number, discount):
-    
-    num = sum(number)
-    end = len(discount) - num  #number수까지 돌아주면 됨
     count = 0
-
-    to_dict = {}
+    s_n = sum(number) #구해야하는 과일의 총 개수
+    want_n = {} #{'banana': 3, 'apple': 2, 'rice': 2}
     for i in range(len(want)):
-        to_dict[want[i]] = number[i] 
+        want_n[want[i]] = number[i]
     
-    for i in range(end+1):  #discount 순회
-        temp = discount[i:i+num] 
-        check = True
-        for k,v in to_dict.items():
-            if temp.count(k) != v:
-                check = False
-                break
-        #할인 모두 만족
-        if check == True:
+    #discount 순회
+    for i in range(len(discount)- s_n + 1): 
+        counter = Counter(discount[i:i+s_n])
+        #원하는 물품 모두 구매 가능한 경우
+        if counter == want_n:
             count += 1
     
     return count
+        
+    
