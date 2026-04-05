@@ -1,24 +1,23 @@
-#이진탐색 사용 (첫시도: 정답률 93%) 
-#틀린이유: start = min(citations), end = max(ci)
-#범위를 잘못잡음. 답은 0~n 사이에 존재함. 
-
-def solution(citations):    
-    answer = 0
-
-    start = 0
-    end = len(citations)
-    while start <= end:    
-        h = (start + end) // 2
-        #h-index 찾기(h번 이상 수 h편 이상, 나머지 h 이하)
-        check = 0
-        for i in citations:
-            if i >= h:
+def solution(citations):
+    result = 0
+    
+    l = 0
+    r = len(citations)
+    while l <= r:
+        mid = (l+r)//2
+        
+        check = 0 
+        #h-index 조건확인
+        for num in citations:
+            if num >= mid:
                 check += 1
-        #조건 체크
-        if check >= h:
-            answer = h #기록
-            start = h + 1
-        else: #h가 큰 경우
-            end = h - 1
-
-    return answer
+        #범위탐색
+        if mid <= check:
+            result = mid
+            l = mid + 1  #mid수가 커져야함      
+        else: 
+            r = mid - 1  #mid수가 작아져야함
+            
+    return result
+            
+            
