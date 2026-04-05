@@ -1,18 +1,17 @@
 def solution(clothes):
-    
-    #종류별로 구분하기
-    dic = {}
-    for v,t in clothes:
-        if t not in dic:
-            dic[t] = [v] #리스트로 초기화
+    c = {}
+    #1.종류별로 분류  
+    for name, kind in clothes:
+        if kind not in c:
+            c[kind] = [name]
         else:
-            dic[t].append(v)
-    
+            c[kind] += [name]
+     
+    count = 1
+    #2.조합 개수 세기 (a+1)(b+1) -> ab,a,b,1 
+    for k,v in c.items():  
+        count *= (len(v)+1)    
         
-    #조합 카운트
-    answer = 1
-    for _, t in dic.items():
-        answer *= (len(t) + 1)
-    
-    
-    return answer - 1
+    return count -1 #모든거 입지않은 1 케이스 빼주기
+        
+     
